@@ -1,0 +1,22 @@
+{
+  "name": "vue-validation",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaotoday/vue-validation.git"
+  },
+  "author": "zhaojintian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhaotoday/vue-validation/issues"
+  },
+  "homepage": "https://github.com/zhaotoday/vue-validation#readme",
+  "dependencies": {
+    "async-validator": "^3.5.2"
+  }
+}
