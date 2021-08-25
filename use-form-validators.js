@@ -73,20 +73,20 @@ export const useFormValidators = () => {
               const error = errors.find((error) => error.field === field);
 
               if (error) {
-                cForm.errors[field] = error.message;
+                cForm.errors = { ...cForm.errors, [field]: error.message };
               } else {
-                cForm.errors[field] = "";
+                cForm.errors = { ...cForm.errors, [field]: "" };
               }
             } else {
-              cForm.errors[field] = "";
+              cForm.errors = { ...cForm.errors, [field]: "" };
             }
           } else {
             Object.keys(cForm.errors).forEach((field) => {
-              cForm.errors[field] = "";
+              cForm.errors = { ...cForm.errors, [field]: "" };
             });
 
             (errors || []).forEach((error) => {
-              cForm.errors[error.field] = error.message;
+              cForm.errors = { ...cForm.errors, [error.field]: error.message };
             });
           }
 
