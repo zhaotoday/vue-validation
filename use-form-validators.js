@@ -86,7 +86,9 @@ export const useFormValidators = () => {
             });
 
             (errors || []).forEach((error) => {
-              cForm.errors = { ...cForm.errors, [error.field]: error.message };
+              if (!cForm.errors[error.field]) {
+                cForm.errors = { ...cForm.errors, [error.field]: error.message };
+              }
             });
           }
 
