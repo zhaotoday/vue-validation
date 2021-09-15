@@ -96,5 +96,9 @@ export const useFormValidators = () => {
         }
       );
     },
+    async clearInput(cForm, field){
+      cForm.model[field] = '';
+      await this.validate(cForm, field);
+    }
   };
 };
