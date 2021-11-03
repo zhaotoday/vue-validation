@@ -1,6 +1,6 @@
 import AsyncValidator from "async-validator";
 
-export const useFormValidators = ({ ruleOptions = {} } = {}) => {
+export const useFormValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
   return {
     isUserId({ message = "" } = {}) {
       return {
