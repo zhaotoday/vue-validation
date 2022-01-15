@@ -1,8 +1,8 @@
 {
   "name": "vue-validation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
-  "main": "use-form-validators.js",
+  "main": "use-validators.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
