@@ -1,6 +1,11 @@
 import { onUnmounted, reactive } from "vue";
 
-export const useCaptcha = ({ sendText = "获取验证码", validate, request }) => {
+export const useCaptcha = ({
+  sendText = "获取验证码",
+  waitText = "{seconds}s 后获取",
+  validate,
+  request,
+}) => {
   const captcha = {
     timer: null,
     i: 0,
@@ -33,10 +38,13 @@ export const useCaptcha = ({ sendText = "获取验证码", validate, request }) 
     captcha.leftSeconds = 120;
 
     cCaptcha.disabled = true;
-    cCaptcha.message = `${captcha.leftSeconds}s 后获取`;
+    cCaptcha.message = waitText.replace("{seconds}", captcha.leftSeconds + "");
 
     captcha.timer = setInterval(() => {
-      cCaptcha.message = `${captcha.leftSeconds - ++captcha.i}s 后获取`;
+      cCaptcha.message = waitText.replace(
+        "{seconds}",
+        captcha.leftSeconds - ++captcha.i + ""
+      );
 
       if (captcha.leftSeconds === captcha.i) {
         clearInterval(captcha.timer);
