@@ -62,7 +62,7 @@ export const useValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
     isPassword({ label = "密码", message = "" } = {}) {
       return {
         pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/,
-        message: message || `${label}格式错误（6-16位字母+数字组合）`,
+        message: message || `${label}格式错误（6-16位字母+数字）`,
         ...ruleOptions,
       };
     },
