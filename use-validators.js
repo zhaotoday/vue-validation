@@ -61,14 +61,14 @@ export const useValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
     },
     isPassword({ label = "密码", message = "" } = {}) {
       return {
-        pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])[\w!@#$%^&*()-+=]{6,16}$/,
-        message: message || `${label}需包含字母+数字，位数6-16`,
+        pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])[\w\S]{6,16}$/,
+        message: message || `${label}需包含字母+数字，且为6-16位`,
         ...ruleOptions,
       };
     },
-    isCaptcha({ label = "验证码", message = "" } = {}) {
+    isCaptcha({ label = "验证码", length = 6, message = "" } = {}) {
       return {
-        len: 6,
+        len: length,
         message: message || `${label}格式错误`,
         ...ruleOptions,
       };
