@@ -66,7 +66,7 @@ export const useValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
         ...ruleOptions,
       };
     },
-    isCaptcha({ label = "验证码", length = 6, message = "" } = {}) {
+    isCaptcha({ label = "验证码", message = "", length = 6, } = {}) {
       return {
         len: length,
         message: message || `${label}格式错误`,
