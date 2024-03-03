@@ -66,7 +66,7 @@ export const useValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
         ...ruleOptions,
       };
     },
-    isCaptcha({ label = "验证码", message = "", length = 6, } = {}) {
+    isCaptcha({ label = "验证码", message = "", length = 6 } = {}) {
       return {
         len: length,
         message: message || `${label}格式错误`,
@@ -74,40 +74,45 @@ export const useValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
       };
     },
     async validate(cForm, field, callback) {
-      await new AsyncValidator(cForm.rules).validate(
-        cForm.model,
-        async (errors) => {
-          if (field) {
-            if (errors) {
-              const error = errors.find((error) => error.field === field);
+      try {
+        await new AsyncValidator(cForm.rules).validate(
+          cForm.model,
+          async (errors) => {
+            if (field) {
+              if (errors) {
+                const error = errors.find((error) => error.field === field);
 
-              if (error) {
-                cForm.errors = { ...cForm.errors, [field]: error.message };
+                if (error) {
+                  cForm.errors = { ...cForm.errors, [field]: error.message };
+                } else {
+                  cForm.errors = { ...cForm.errors, [field]: "" };
+                }
               } else {
                 cForm.errors = { ...cForm.errors, [field]: "" };
               }
             } else {
-              cForm.errors = { ...cForm.errors, [field]: "" };
+              Object.keys(cForm.errors).forEach((field) => {
+                cForm.errors = { ...cForm.errors, [field]: "" };
+              });
+
+              (errors || []).forEach((error) => {
+                if (!cForm.errors[error.field]) {
+                  cForm.errors = {
+                    ...cForm.errors,
+                    [error.field]: error.message,
+                  };
+                }
+              });
             }
-          } else {
-            Object.keys(cForm.errors).forEach((field) => {
-              cForm.errors = { ...cForm.errors, [field]: "" };
-            });
 
-            (errors || []).forEach((error) => {
-              if (!cForm.errors[error.field]) {
-                cForm.errors = { ...cForm.errors, [error.field]: error.message };
-              }
-            });
+            callback && callback(errors, cForm.model, cForm.rules);
           }
-
-          callback && callback(errors, cForm.model, cForm.rules);
-        }
-      );
+        );
+      } catch (e) {}
     },
-    async clearInput(cForm, field){
-      cForm.model[field] = '';
+    async clearInput(cForm, field) {
+      cForm.model[field] = "";
       await this.validate(cForm, field);
-    }
+    },
   };
 };
