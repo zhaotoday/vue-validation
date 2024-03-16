@@ -1,6 +1,6 @@
 {
   "name": "vue-validation",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "use-validators.js",
   "scripts": {

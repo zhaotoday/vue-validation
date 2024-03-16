@@ -28,7 +28,8 @@ export const useValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
     },
     isRequired({ label, message } = {}) {
       return {
-        required: true,
+        validator: (rule, value) =>
+          Array.isArray(value) ? !!value.length : !!value,
         message: message || `请输入${label}`,
         ...ruleOptions,
       };
