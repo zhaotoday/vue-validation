@@ -34,6 +34,21 @@ export const useValidators = ({ ruleOptions = { trigger: "blur" } } = {}) => {
         ...ruleOptions,
       };
     },
+    isData({ label, message }) {
+      return {
+        validator: (rule, value) => {
+          if (typeof value === "object" && value !== null) {
+            // 检查是否有 id 属性，且非空值
+            if (value.hasOwnProperty("id") && !!value.id) {
+              return true;
+            }
+          }
+          return false;
+        },
+        message: message || `请输入${label}`,
+        ...ruleOptions,
+      };
+    },
     isPhoneNumber({ label = "手机号", message = "" } = {}) {
       return {
         pattern: /^1\d{2}\s?\d{4}\s?\d{4}$/,
