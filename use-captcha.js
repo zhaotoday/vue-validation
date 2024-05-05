@@ -55,8 +55,20 @@ export const useCaptcha = ({
     }, 1000);
   };
 
+  const resetCaptcha = () => {
+    clearInterval(captcha.timer);
+
+    captcha.timer = null;
+    captcha.i = 0;
+    captcha.leftSeconds = 120;
+
+    cCaptcha.disabled = false;
+    cCaptcha.message = sendText;
+  };
+
   return {
     cCaptcha,
     sendCaptcha,
+    resetCaptcha,
   };
 };
